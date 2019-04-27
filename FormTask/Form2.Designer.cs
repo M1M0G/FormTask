@@ -36,6 +36,8 @@
             this.To = new System.Windows.Forms.DateTimePicker();
             this.Ok = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.Services = new System.Windows.Forms.CheckedListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // People
@@ -55,7 +57,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 11);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 2;
@@ -87,7 +89,7 @@
             // Ok
             // 
             this.Ok.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Ok.Location = new System.Drawing.Point(7, 226);
+            this.Ok.Location = new System.Drawing.Point(7, 465);
             this.Ok.Name = "Ok";
             this.Ok.Size = new System.Drawing.Size(256, 34);
             this.Ok.TabIndex = 6;
@@ -104,11 +106,35 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Дата прибытия и выезда";
             // 
+            // Services
+            // 
+            this.Services.FormattingEnabled = true;
+            this.Services.Items.AddRange(new object[] {
+            "Сейф в номере",
+            "Пополнение мини-бара",
+            "Куртизанки на ночь",
+            "Личный автомобиль"});
+            this.Services.Location = new System.Drawing.Point(7, 322);
+            this.Services.Name = "Services";
+            this.Services.Size = new System.Drawing.Size(256, 94);
+            this.Services.TabIndex = 26;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 303);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Доп. услуги";
+            // 
             // ShortForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 266);
+            this.ClientSize = new System.Drawing.Size(269, 511);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.Services);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Ok);
             this.Controls.Add(this.To);
@@ -134,5 +160,7 @@
         private System.Windows.Forms.DateTimePicker To;
         private System.Windows.Forms.Button Ok;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckedListBox Services;
+        private System.Windows.Forms.Label label4;
     }
 }

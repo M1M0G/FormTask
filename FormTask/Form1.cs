@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+
 
 namespace FormTask
 {
@@ -28,12 +28,21 @@ namespace FormTask
             To.Value.ToString("dd/mm/yyyy");
         }
 
+        private void Services_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string tmp;
+            string n = Services.Text;
+            tmp = n;
+            tmp = n + "; " + tmp;
+        }
+
         private void HotelApp_Load(object sender, EventArgs e)
         {
             Peoples.Text = Rooms.NumberOfPersons;
             Beds.Text = Rooms.NumberOfBeds;
             From.Value = Rooms.ResidencyFrom;
             To.Value = Rooms.ResidencyTo;
+            Services.Text = Rooms.Services;
         }
 
         private void Peoples_TextChanged(object sender, EventArgs e)
@@ -43,13 +52,15 @@ namespace FormTask
 
         private void button1_Click(object sender, EventArgs e)
         {
-             var Rooms = new Rooms();
-             Rooms.NumberOfPersons = Peoples.Text;
-             Rooms.NumberOfBeds = Beds.Text;
-             Rooms.ResidencyFrom = From.Value;
-             Rooms.ResidencyTo = To.Value;
-             listBox2.Items.Add(Rooms);
-             //listBox2.Items.Clear();
+            var Rooms = new Rooms();
+            Rooms.NumberOfPersons = Peoples.Text;
+            Rooms.NumberOfBeds = Beds.Text;
+            Rooms.ResidencyFrom = From.Value;
+            Rooms.ResidencyTo = To.Value;
+            Rooms.Services = Services.Text;
+            listBox2.Items.Add(Rooms);
+            //listBox2.Items.Clear();
+            this.tabControl1.SelectedIndex = 1;
         }
 
         
@@ -80,6 +91,57 @@ namespace FormTask
                     listBox2.Items.Insert(index, item);
                 }
             }
+        }
+        private DateTime expiry;
+
+        private void Alert_Click(object sender, EventArgs e) // ОЧЕНЬ ВАЖНАЯ КНОПКА
+        {
+            string title = " КРАСТНАЯ УГРОЗА ";
+            TabPage ALERT = new TabPage(title);
+            ALERT.BackColor = Color.Red;
+            tabControl1.TabPages.Add(ALERT);
+            this.tabControl1.SelectedIndex = 3;
+
+
+
+            // label настройка и добавление
+
+            Label label = new Label();
+            label.Location = new Point(0, 0);
+            label.Text = "ВЫ БУДЕТЕ РАССТРЕЛЯНЫ, ЗА СБОР ЛИЧНОЙ ИНФОРМАЦИИ \nВСЕГО ХОРОШЕГО!";
+            label.Font = new Font("Tobota", 13, FontStyle.Bold);
+            label.ForeColor = Color.Snow;
+            label.AutoSize = true;
+            ALERT.Controls.Add(label);
+
+            Timer timer = new Timer();
+            TimeSpan delay = TimeSpan.FromMinutes(1);
+
+            expiry = DateTime.Now.Add(delay);
+            timer.Start();
+            TextBox textBox = new TextBox();
+            textBox.Location = new Point(0, 40);
+            textBox.Font = new Font("Tobota", 13, FontStyle.Bold);
+
+            TimeSpan remaining = expiry - DateTime.Now;
+            textBox.Text = remaining.ToString();
+             
+            try
+            {
+                SoundPlayer sndplayr = new
+                         SoundPlayer(FormTask.Properties.Resources.SSSR);
+                sndplayr.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ": " + ex.StackTrace.ToString(),
+                               "Error");
+            }
+        }
+
+        private void NO_Click(object sender, EventArgs e)
+        {
+            label14.Text =  "*Невозможно выполнить эту операцию";
         }
     }
 }

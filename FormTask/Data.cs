@@ -51,16 +51,16 @@ namespace FormTask
             /// </summary>
             public string NumberOfBeds { get; set; }
 
-            /// <summary>
-            /// Фотография номера
-            /// </summary>
-            public byte[] Photo { get; set; }
+            public string Services { get; set; }
 
-        public override string ToString()
-        {
-            return $"Кол-во человек: {NumberOfPersons}, Кол-во кроватей: {NumberOfBeds}, Дата прибытия: {ResidencyFrom}, Дата выезда: {ResidencyTo}";
-        }
-    }
+
+            public override string ToString()
+            {
+                return $"Кол-во человек: {NumberOfPersons}, Кол-во кроватей: {NumberOfBeds}, Дата прибытия: {ResidencyFrom}, Дата выезда: {ResidencyTo}, Доп. Услуги: {Services}";
+            }
+
+
+        }   
 
         /// <summary>
         /// Авторизация
