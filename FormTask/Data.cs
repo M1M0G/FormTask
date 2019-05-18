@@ -51,12 +51,13 @@ namespace FormTask
             /// </summary>
             public string NumberOfBeds { get; set; }
 
-            public string Services { get; set; }
+            public List<string> Services { get; set; }
 
 
             public override string ToString()
             {
-                return $"Кол-во человек: {NumberOfPersons}, Кол-во кроватей: {NumberOfBeds}, Дата прибытия: {ResidencyFrom}, Дата выезда: {ResidencyTo}, Доп. Услуги: {Services}";
+                var joined_services = string.Join(",",Services);
+                return $"Кол-во человек: {NumberOfPersons}, Кол-во кроватей: {NumberOfBeds}, Дата прибытия: {ResidencyFrom.ToShortDateString()}, Дата выезда: {ResidencyTo.ToShortDateString()}, Доп. Услуги: {joined_services}";
             }
 
 

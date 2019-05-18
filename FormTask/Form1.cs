@@ -30,10 +30,7 @@ namespace FormTask
 
         private void Services_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string tmp;
-            string n = Services.Text;
-            tmp = n;
-            tmp = n + "; " + tmp;
+
         }
 
         private void HotelApp_Load(object sender, EventArgs e)
@@ -42,7 +39,7 @@ namespace FormTask
             Beds.Text = Rooms.NumberOfBeds;
             From.Value = Rooms.ResidencyFrom;
             To.Value = Rooms.ResidencyTo;
-            Services.Text = Rooms.Services;
+            //Services.Text = Rooms.Services;
         }
 
         private void Peoples_TextChanged(object sender, EventArgs e)
@@ -53,17 +50,28 @@ namespace FormTask
         private void button1_Click(object sender, EventArgs e)
         {
             var Rooms = new Rooms();
+
             Rooms.NumberOfPersons = Peoples.Text;
             Rooms.NumberOfBeds = Beds.Text;
             Rooms.ResidencyFrom = From.Value;
-            Rooms.ResidencyTo = To.Value;
-            Rooms.Services = Services.Text;
-            listBox2.Items.Add(Rooms);
-            //listBox2.Items.Clear();
-            this.tabControl1.SelectedIndex = 1;
-        }
+            Rooms.ResidencyTo = To.Value;             
+            Rooms.Services = new List<string>();        
+            
+            foreach (string s in Services.CheckedItems)                         
+                if (s != null) Rooms.Services.Add(s);
 
-        
+            listBox2.Items.Add(Rooms);         
+            this.tabControl1.SelectedIndex = 1;
+
+            // чистка полей
+
+            Peoples.Text = null;
+            Beds.Text = null;
+            From.Value = DateTime.Now;
+            To.Value = DateTime.Now;
+            for (int i = 0; i<4; i++ )
+                Services.SetItemChecked(i, false); 
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -92,7 +100,7 @@ namespace FormTask
                 }
             }
         }
-        private DateTime expiry;
+        //private DateTime expiry;
 
         private void Alert_Click(object sender, EventArgs e) // ОЧЕНЬ ВАЖНАЯ КНОПКА
         {
@@ -114,17 +122,17 @@ namespace FormTask
             label.AutoSize = true;
             ALERT.Controls.Add(label);
 
-            Timer timer = new Timer();
-            TimeSpan delay = TimeSpan.FromMinutes(1);
+            //Timer timer = new Timer();
+            //TimeSpan delay = TimeSpan.FromMinutes(1);
 
-            expiry = DateTime.Now.Add(delay);
-            timer.Start();
-            TextBox textBox = new TextBox();
-            textBox.Location = new Point(0, 40);
-            textBox.Font = new Font("Tobota", 13, FontStyle.Bold);
+            //expiry = DateTime.Now.Add(delay);
+            //timer.Start();
+            //TextBox textBox = new TextBox();
+            //textBox.Location = new Point(0, 40);
+            //textBox.Font = new Font("Tobota", 13, FontStyle.Bold);
 
-            TimeSpan remaining = expiry - DateTime.Now;
-            textBox.Text = remaining.ToString();
+            //TimeSpan remaining = expiry - DateTime.Now;
+            //textBox.Text = remaining.ToString();
              
             try
             {
@@ -142,6 +150,17 @@ namespace FormTask
         private void NO_Click(object sender, EventArgs e)
         {
             label14.Text =  "*Невозможно выполнить эту операцию";
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Peoples.Text = null;
+            Beds.Text = null;
+            From.Value = DateTime.Now;
+            To.Value = DateTime.Now;
+            for (int i = 0; i < 4; i++)
+                Services.SetItemChecked(i, false);
         }
     }
 }

@@ -42,10 +42,10 @@
             // 
             // People
             // 
-            this.People.Location = new System.Drawing.Point(7, 32);
+            this.People.Location = new System.Drawing.Point(7, 25);
             this.People.Name = "People";
             this.People.Size = new System.Drawing.Size(256, 20);
-            this.People.TabIndex = 0;
+            this.People.TabIndex = 28;
             // 
             // Beds
             // 
@@ -118,6 +118,7 @@
             this.Services.Name = "Services";
             this.Services.Size = new System.Drawing.Size(256, 94);
             this.Services.TabIndex = 26;
+            this.Services.SelectedIndexChanged += new System.EventHandler(this.Services_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -144,7 +145,8 @@
             this.Controls.Add(this.Beds);
             this.Controls.Add(this.People);
             this.Name = "ShortForm";
-            this.Text = "Form2";
+            this.Text = "Окно изменений";
+            this.Load += new System.EventHandler(this.ShortForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
