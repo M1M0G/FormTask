@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using System.Media;
 
 
@@ -39,7 +45,6 @@ namespace FormTask
             Beds.Text = Rooms.NumberOfBeds;
             From.Value = Rooms.ResidencyFrom;
             To.Value = Rooms.ResidencyTo;
-            //Services.Text = Rooms.Services;
         }
 
         private void Peoples_TextChanged(object sender, EventArgs e)
@@ -161,6 +166,45 @@ namespace FormTask
             To.Value = DateTime.Now;
             for (int i = 0; i < 4; i++)
                 Services.SetItemChecked(i, false);
+        }
+
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog() { Filter = "Заявка|*.hotelapp" };
+
+            if (sfd.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            var rooms = new Rooms()
+            {
+                ResidencyTo = To.Value,
+                ResidencyFrom = From.Value,
+                NumberOfPersons = Peoples.Text,
+                NumberOfBeds = Beds.Text,
+            };
+            var xs = new XmlSerializer(typeof(Rooms));
+            var file = File.Create(sfd.FileName);
+            xs.Serialize(file, rooms);
+            file.Close();
+        }
+
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog() { Filter = "Заявка|*.hotelapp" };
+
+            if (ofd.ShowDialog(this) != DialogResult.OK)
+                return;
+            var xs = new XmlSerializer(typeof(Rooms));
+            var file = File.OpenRead(ofd.FileName);
+            var rooms = (Rooms)xs.Deserialize(file);
+            file.Close();
+
+            To.Value = rooms.ResidencyTo;
+            From.Value = rooms.ResidencyFrom;
+            Peoples.Text = rooms.NumberOfPersons;
+            Beds.Text = rooms.NumberOfBeds;
+            listBox2.Items.Add(rooms);
+            this.tabControl1.SelectedIndex = 2;
         }
     }
 }
