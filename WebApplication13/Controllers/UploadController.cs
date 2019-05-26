@@ -12,6 +12,19 @@ namespace FormTask.web.Controllers
 {
     public class UploadController : Controller
     {
+        public static string ToStringServices(List<string> services)
+        {
+
+            string stroka = "";
+            foreach (var e in services)
+            {
+                stroka = stroka + e;
+                stroka += ", ";
+            }
+
+            return stroka;
+        }
+
         public IActionResult Index()
         {
             return View();

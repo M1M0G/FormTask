@@ -1,4 +1,5 @@
-﻿@model FormTask.Listrooms
+﻿@using FormTask.web.Controllers
+@model FormTask.Listrooms
 @{
 	ViewBag.Title = "<Бронирование комнаты доступное с  "; //+ Model.ResidencyFrom;
 	Layout = "_Layout";
@@ -17,13 +18,13 @@
 	</thead>
 	@foreach (var sm in Model.Rooms)
 	{
-	<tr>
+		<tr>
 			<td>@sm.ResidencyFrom</td>
 			<td>@sm.ResidencyTo</td>
 			<td>@sm.NumberOfPersons</td>
 			<td>@sm.NumberOfBeds</td>
-			<td>@sm.*Services</td>
-	</tr>
+			<td>@UploadController.ToStringServices(sm.Services)</td>
+		</tr>
 	}
 
 
