@@ -175,14 +175,17 @@ namespace FormTask
             if (sfd.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            var rooms = new Rooms()
+            var rooms = new Listrooms()
             {
-                ResidencyFrom = From.Value,
-                ResidencyTo = To.Value,
-                NumberOfPersons = Peoples.Text,
-                NumberOfBeds = Beds.Text,
+                //ResidencyFrom = From.Value,
+                //ResidencyTo = To.Value,
+                //NumberOfPersons = Peoples.Text,
+                //NumberOfBeds = Beds.Text,
+                Rooms = listBox2.Items.OfType<Rooms>().ToList(),
             };
-            var xs = new XmlSerializer(typeof(Rooms));
+
+           
+            var xs = new XmlSerializer(typeof(Listrooms));
             var file = File.Create(sfd.FileName);
             xs.Serialize(file, rooms);
             file.Close();
@@ -194,17 +197,22 @@ namespace FormTask
 
             if (ofd.ShowDialog(this) != DialogResult.OK)
                 return;
-            var xs = new XmlSerializer(typeof(Rooms));
+            var xs = new XmlSerializer(typeof(Listrooms));
             var file = File.OpenRead(ofd.FileName);
-            var rooms = (Rooms)xs.Deserialize(file);
+            var rooms = (Listrooms)xs.Deserialize(file);
             file.Close();
 
-           
-            From.Value = rooms.ResidencyFrom;
-            To.Value = rooms.ResidencyTo;
-            Peoples.Text = rooms.NumberOfPersons;
-            Beds.Text = rooms.NumberOfBeds;
-            listBox2.Items.Add(rooms);
+            //listBox2.Items.Clear();
+
+            foreach (var r in rooms.Rooms)
+            {
+                listBox2.Items.Add(r);
+            }
+            //From.Value = rooms.ResidencyFrom;
+            //To.Value = rooms.ResidencyTo;
+            //Peoples.Text = rooms.NumberOfPersons;
+            //Beds.Text = rooms.NumberOfBeds;
+            //listBox2.Items.Add(rooms);
             this.tabControl1.SelectedIndex = 2;
         }
 
