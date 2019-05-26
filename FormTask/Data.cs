@@ -6,24 +6,33 @@ using System.Threading.Tasks;
 
 namespace FormTask
 {
-    
-        /// <summary>
-        /// Бронирование номера
-        /// </summary>
-        public class Booking
-        {
 
-            /// <summary>
-            /// Выбор номера
-            /// </summary>
-            public List<Rooms> GetRooms { get; set; }
+    ///// <summary>
+    ///// Бронирование номера
+    ///// </summary>
+    //public class Booking
+    //{
 
-            /// <summary>
-            /// Отмена бронирования
-            /// </summary>
-            public string CancelBooking { get; set; }
+    //    /// <summary>
+    //    /// Выбор номера
+    //    /// </summary>
+    //    public List<Rooms> GetRooms { get; set; }
 
-        }
+    //    /// <summary>
+    //    /// Отмена бронирования
+    //    /// </summary>
+    //    public string CancelBooking { get; set; }
+
+    //}
+
+    public class Listrooms
+    {
+        public List<Rooms> Rooms { get; set; }
+
+    }
+
+
+
 
         /// <summary>
         /// Номера 
@@ -63,26 +72,26 @@ namespace FormTask
 
         }   
 
-        /// <summary>
-        /// Авторизация
-        /// </summary>
-        public class Autorization
-        {
-            /// <summary>
-            /// Имя пользователя
-            /// </summary>
-            public string UserName { get; set; }
+        ///// <summary>
+        ///// Авторизация
+        ///// </summary>
+        //public class Autorization
+        //{
+        //    /// <summary>
+        //    /// Имя пользователя
+        //    /// </summary>
+        //    public string UserName { get; set; }
 
-            /// <summary>
-            /// Пароль
-            /// </summary>
-            public string Password { get; set; }
+        //    /// <summary>
+        //    /// Пароль
+        //    /// </summary>
+        //    public string Password { get; set; }
 
-            /// <summary>
-            /// Почта
-            /// </summary>
-            public string Mail { get; set; }
-        }
+        //    /// <summary>
+        //    /// Почта
+        //    /// </summary>
+        //    public string Mail { get; set; }
+        //}
 
 
     

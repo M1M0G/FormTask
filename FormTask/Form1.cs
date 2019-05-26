@@ -177,8 +177,8 @@ namespace FormTask
 
             var rooms = new Rooms()
             {
-                ResidencyTo = To.Value,
                 ResidencyFrom = From.Value,
+                ResidencyTo = To.Value,
                 NumberOfPersons = Peoples.Text,
                 NumberOfBeds = Beds.Text,
             };
@@ -199,12 +199,18 @@ namespace FormTask
             var rooms = (Rooms)xs.Deserialize(file);
             file.Close();
 
-            To.Value = rooms.ResidencyTo;
+           
             From.Value = rooms.ResidencyFrom;
+            To.Value = rooms.ResidencyTo;
             Peoples.Text = rooms.NumberOfPersons;
             Beds.Text = rooms.NumberOfBeds;
             listBox2.Items.Add(rooms);
             this.tabControl1.SelectedIndex = 2;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

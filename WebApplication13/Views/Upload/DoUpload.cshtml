@@ -1,0 +1,32 @@
+﻿@model FormTask.Listrooms
+@{
+	ViewBag.Title = "<Бронирование комнаты доступное с  "; //+ Model.ResidencyFrom;
+	Layout = "_Layout";
+}
+<h2>Список заказов </h2>
+
+<table class="table table-bordered table-responsive table-hover">
+	<thead>
+		<tr>
+			<td>С какого числа</td>
+			<td>По какое число</td>
+			<td>Кол-во человек</td>
+			<td>Кол-во кроватей</td>
+			<td>Доп. услуги</td>
+		</tr>
+	</thead>
+	@foreach (var sm in Model.Rooms)
+	{
+	<tr>
+			<td>@sm.ResidencyFrom</td>
+			<td>@sm.ResidencyTo</td>
+			<td>@sm.NumberOfPersons</td>
+			<td>@sm.NumberOfBeds</td>
+			<td>@sm.Services</td>
+	</tr>
+	}
+
+
+
+
+</table>

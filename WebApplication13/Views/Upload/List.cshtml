@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.List<FormTask.web.Models.DataAccessPostgreSqlProvider.DbListrooms>
+
+@{
+	ViewBag.Title = "общий список ХУЕТЫ";
+	Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+@foreach (var Table in Model)
+{
+<div>
+	<table class="table table-bordered table-responsive table-hover">
+		<thead>
+			<tr>
+				<td>С какого числа</td>
+				<td>По какое число</td>
+				<td>Кол-во человек</td>
+				<td>Кол-во кроватей</td>
+				<td>Доп. услуги</td>
+			</tr>
+		</thead>
+		@foreach (var sm in Table.Rooms)
+		{
+			<tr>
+				<td>@sm.ResidencyFrom</td>
+				<td>@sm.ResidencyTo</td>
+				<td>@sm.NumberOfPersons</td>
+				<td>@sm.NumberOfBeds</td>
+				<td>@sm.Services</td>
+			</tr>
+		}
+	</table>
+	</div>
+}
